@@ -1,0 +1,3 @@
+MODULE_DIR = (
+    "events",
+)

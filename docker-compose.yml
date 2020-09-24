@@ -1,0 +1,8 @@
+version: "3.5"
+
+services:
+  bot:
+    build: .
+    container_name: bot
+    environment:
+      - TOKEN=TOKEN_HERE
