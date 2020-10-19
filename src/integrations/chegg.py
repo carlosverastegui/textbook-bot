@@ -1,6 +1,6 @@
 import aiohttp
 
-async def amazon(isbn):
+async def chegg(isbn):
     """searches amazon for the ISBN
 
        returns the item name and price as a dictionary
