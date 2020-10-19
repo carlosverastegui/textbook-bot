@@ -5,10 +5,11 @@ import config
 from importlib import import_module
 from os import environ
 from utils import get_files
+from discord.ext import commands
 
 
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 
@@ -25,7 +26,7 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     token = environ.get("TOKEN") or getattr(config, "TOKEN")
 
-    bot = discord.AutoShardedClient()
+    bot = commands.Bot(command_prefix="!")
     discord.bot = bot
 
     loop.create_task(main())
