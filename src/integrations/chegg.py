@@ -1,15 +1,15 @@
 import aiohttp
 
-async def chegg(isbn):
-    """searches amazon for the ISBN
 
-       returns the item name and price as a dictionary
-    """
+class Chegg:
+    def __init__(self, key):
+        self.key = key
 
+    async def search(self, isbn):
+        # use self.key for your API auth
+        # use with aiohttp to do the requests
 
-    return {
-        "price": 500,
-        "name": "test item"
-    }
-
-
+        return {
+            "price": 500,
+            "name": "test item"
+        }

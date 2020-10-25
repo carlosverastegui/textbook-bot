@@ -14,4 +14,21 @@ async def search(ctx, isbn: str):
 
     print(sorted_items, flush=True)
     """
+
+
+    """
+    embed = discord.Embed(title="Textbook Results")
+
+    embed.description = "Textbook name: **test**\n\n" \
+                        "1.) Amazon - $10\nLink: [click here](https://google.com)\n\n" \
+                        "2.) Chegg - $15\nLink: [click here](https://google.com)\n\n" \
+                        "3.) Pearson - $20\nLink: [click here](https://google.com)"
+
+    await ctx.send(embed=embed)
+
+    failed_embed = discord.Embed(title="Textbook Results")
+    failed_embed.description = "No results found. Please double-check your ISBN and try again."
+    await ctx.send(embed=failed_embed)
+    """
+
     pass

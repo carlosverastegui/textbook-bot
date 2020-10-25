@@ -1,2 +1,3 @@
-from .amazon import amazon
-from .chegg import chegg
+from .amazon import Amazon
+from .chegg import Chegg
+from .pearson import Pearson

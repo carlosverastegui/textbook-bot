@@ -1,7 +1,7 @@
 import aiohttp
 
 
-class Amazon:
+class Pearson:
     def __init__(self, key):
         self.key = key
 
