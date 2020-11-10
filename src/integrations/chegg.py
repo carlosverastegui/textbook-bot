@@ -14,17 +14,15 @@ class Chegg:
         
         price = r.html.find('.rental-price', first=True).text
         title = r.html.find('.title', first=True).text
-        authors = r.html.find('.author a', first=True).text
-        #password = 1
-        #book_data = await request(f"http://api.chegg.com/rent.svc?KEY={self.key}&PW={password}&isbn={isbn}&R=JSON&with_pids=1&page=1&results_per_page=10&V=4.0")
         
-        #book_info = book_data.get('Items')[0]
-        #title = temp.get('BookInfo', {}).get('Title') 
-        #price = temp.get('BookInfo', {}).get('ListPrice') 
-        #authors = temp.get('BookInfo', {}).get('Authors') 
+        authors = r.html.find('.author a')
+        author_list = []
+        
+        for author in authors:
+            author_list.append(author.text)
         
         return {
             "price": price,
             "name": title,
-            "authors": authors
+            "authors": author_list
         }
