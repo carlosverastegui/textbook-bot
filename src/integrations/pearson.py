@@ -1,4 +1,4 @@
-import aiohttp
+from requests_html import HTMLSession
 
 
 class Pearson:
@@ -6,13 +6,11 @@ class Pearson:
         self.key = key
 
     async def search(self, isbn):
-        # use self.key for your API auth
-        # use with aiohttp to do the requests
-        try: 
+        try:
             session = HTMLSession()
-            r = session.get(f"https://www.pearson.com/store/en-us/search.html?_charset_=UTF-8&q={isbn}")
-            price = r.html.find('.selected-product__price', first=True).text
-
+            url = f"https://www.pearson.com/store/en-us/search.html?_charset_=UTF-8&q={isbn}"
+            r = session.get(url)
+            price = float((r.html.find('.selected-product__price', first=True).text).replace("$", ""))
 
             title = r.html.find('.product-summary__heading', first=True).text
             author = r.html.find('.product-authors', first=True).text
@@ -20,9 +18,10 @@ class Pearson:
             return {
                 "price": price,
                 "name": title,
-                "authors": author
+                "authors": author,
+                "url": url,
+                "integration": "pearson"
             }
-        
-        except:
-            return None 
 
+        except AttributeError:
+            return None
