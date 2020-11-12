@@ -21,13 +21,14 @@ class Chegg:
         for author in authors:
             author_list.append(author.text)
         '''
+        
         session = HTMLSession()
         r = session.get('https://www.chegg.com/textbooks/book-9781305657960-1305657969.html')
 
         price_pane = r.html.find('.purchase-option-content C-pdpv2-purchaseOption-buy', first=True)
         price = price_pane.find('.total-price', first=True)
 
-        name = r.html.find('.name', first=True)
+        title = r.html.find('.name', first=True)
         authors = r.html.find('.txt-2 pdp-details-value span')
         author_list = []
 
