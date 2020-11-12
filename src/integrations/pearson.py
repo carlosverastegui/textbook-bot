@@ -2,8 +2,8 @@ from requests_html import HTMLSession
 
 
 class Pearson:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self):
+        pass
 
     async def search(self, isbn):
         try:

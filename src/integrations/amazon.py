@@ -8,8 +8,7 @@ from utils import request
 
 
 class Amazon:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self):
         self.textsurf_regex = re.compile("url=(.*amazon).*Buy Used \$(.+)</a>")
         self.textsurf_title_regex = re.compile('<h1 class="h1">(.*)')
         self.textsurf_author_regex = re.compile("Author: (.+)")
