@@ -1,5 +1,6 @@
 import aiohttp
 import re
+import urllib.parse
 
 from aiohttp.client_exceptions import ContentTypeError
 from utils import request
@@ -9,32 +10,32 @@ from utils import request
 class Amazon:
     def __init__(self, key):
         self.key = key
-        self.amazon_regex = re.compile('href="(.+)" rel="nofollow" target="_blank">Amazon</a></td><td><b><span id="p_amazon">\$(.+)</span>')
+        self.textsurf_regex = re.compile("url=(.*amazon).*Buy Used \$(.+)</a>")
+        self.textsurf_title_regex = re.compile('<h1 class="h1">(.*)')
+        self.textsurf_author_regex = re.compile("Author: (.+)")
 
     async def search(self, isbn):
         try:
-            book_data = await request(f"https://api.itbook.store/1.0/books/{isbn}")
+            textsurf_page = await request(f"https://www.textsurf.com/details/{isbn}/-", json=False)
 
-            title = book_data.get("title")
-            authors = book_data.get("authors")
-            url = book_data.get("url")
-            isbn10 = book_data.get("isbn10")
+            textsurf_data = self.textsurf_regex.search(textsurf_page)
+            textsurf_title_data = self.textsurf_title_regex.search(textsurf_page)
+            textsurf_author_data = self.textsurf_author_regex.search(textsurf_page)
 
-            if url:
-                book_page = await request(url, json=False)
-                amazon_search = self.amazon_regex.search(book_page)
+            if textsurf_data and textsurf_title_data:
+                amazon_url = urllib.parse.unquote(textsurf_data.group(1))
+                price = float(textsurf_data.group(2))
+                title = textsurf_title_data.group(1)
+                authors = textsurf_author_data.group(1) if textsurf_author_data else ""
 
-                if amazon_search:
-                    #amazon_url = f"https://itbook.store/{amazon_search.group(1)}
-                    amazon_url = f"https://www.amazon.com/gp/product/{isbn10}"
-                    price = amazon_search.group(2)
+                return {
+                    "url": amazon_url,
+                    "price": price,
+                    "name": title,
+                    "authors": authors,
+                    "integration": "amazon"
+                }
 
-                    return {
-                        "price": float(price),
-                        "name": title,
-                        "authors": authors,
-                        "url": amazon_url
-                    }
 
         except ContentTypeError:
             return None
