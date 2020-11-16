@@ -7,7 +7,8 @@ class Chegg:
 
     async def search(self, isbn):
         session = HTMLSession()
-        r = session.get(f"https://www.campusbooks.com/search/{isbn}?buysellrent=buy.html")
+        url = f"https://www.campusbooks.com/search/{isbn}?buysellrent=buy.html"
+        r = session.get(url)
 
         title = r.html.find('h1 .page-header', first=True)
         vendors = r.html.find('tr')
@@ -33,5 +34,7 @@ class Chegg:
         return {
             "price": price.replace('$', ''),
             "name": title,
-            "authors": writer
+            "authors": writer,
+            "url": url,
+            "integration": "chegg"
         }
