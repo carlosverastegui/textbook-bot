@@ -34,8 +34,6 @@ class Chegg:
 
                 break
 
-        print(price, flush=True)
-
         try:
             price = float(price.replace("$", ""))
         except ValueError:
