@@ -27,6 +27,9 @@ class Amazon:
                 title = textsurf_title_data.group(1)
                 authors = textsurf_author_data.group(1) if textsurf_author_data else ""
 
+                if not price:
+                    return None
+
                 return {
                     "url": amazon_url,
                     "price": price,

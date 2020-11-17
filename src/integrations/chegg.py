@@ -1,4 +1,3 @@
-import aiohttp
 from requests_html import HTMLSession
 
 class Chegg:
@@ -26,15 +25,26 @@ class Chegg:
 
         for vendor in vendors:
             tag = vendor.find('[title~=Chegg]', first=True)
-   
+
             if tag:
                 price = vendor.find('td .price', first=True).text
+
+                if not price or isinstance(price, int):
+                    return None
+
                 break
 
+        print(price, flush=True)
+
+        try:
+            price = float(price.replace("$", ""))
+        except ValueError:
+            return None
+
         return {
-            "price": price.replace('$', ''),
+            "price": price,
+            "url": url,
             "name": title,
             "authors": writer,
-            "url": url,
             "integration": "chegg"
         }

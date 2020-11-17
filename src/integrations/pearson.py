@@ -12,6 +12,9 @@ class Pearson:
             r = session.get(url)
             price = float((r.html.find('.selected-product__price', first=True).text).replace("$", ""))
 
+            if not price:
+                return None
+
             title = r.html.find('.product-summary__heading', first=True).text
             author = r.html.find('.product-authors', first=True).text
 
