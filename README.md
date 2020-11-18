@@ -16,3 +16,11 @@ $ git clone https://github.com/carlosverastegui/textbook-bot
 $ cd textbook-bot
 $ docker-compose up --build
 ```
+
+## Usage
+``!search <ISBN>`` in your Discord server
+
+## Misc. Info
+Group 09
+
+CS 321-001
