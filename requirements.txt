@@ -1,2 +1,3 @@
 discord.py==1.4.1
-requests_html
+requests_html==0.10.0
+aiounittest==1.4.0

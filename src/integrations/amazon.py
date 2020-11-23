@@ -3,7 +3,11 @@ import re
 import urllib.parse
 
 from aiohttp.client_exceptions import ContentTypeError
-from utils import request
+
+try:
+    from utils import request
+except ModuleNotFoundError:
+    from src.utils import request
 
 
 
