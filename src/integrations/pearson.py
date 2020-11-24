@@ -7,6 +7,8 @@ class Pearson:
 
     async def search(self, isbn):
         try:
+            if not isbn.isnumeric():
+                return None
             session = HTMLSession()
             url = f"https://www.pearson.com/store/en-us/search.html?_charset_=UTF-8&q={isbn}"
             r = session.get(url)
