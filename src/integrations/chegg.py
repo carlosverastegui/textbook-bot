@@ -1,5 +1,6 @@
 from requests_html import HTMLSession
 
+
 class Chegg:
     def __init__(self):
         pass
@@ -9,7 +10,7 @@ class Chegg:
         url = f"https://www.campusbooks.com/search/{isbn}?buysellrent=buy.html"
         r = session.get(url)
 
-        title = r.html.find('h1 .page-header', first=True)
+        title = r.html.find('h1.page-header', first=True).text
         vendors = r.html.find('tr')
         authors = r.html.find('dt')
 
@@ -20,7 +21,7 @@ class Chegg:
             auth = author.find('strong', first=True)
 
             if auth and auth.text == "Authors":
-                writer = author.text
+                writer = author.text.replace("Authors: ", "")
                 break
 
         for vendor in vendors:
