@@ -18,7 +18,7 @@ class TestPearsonIntegration(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertEqual(data["name"], "Thomas' Calculus: Early Transcendentals, 14th edition")
-        self.assertEqual(data["price"], "$223.99") 
+        self.assertEqual(data["price"], 223.99) 
         self.assertEqual(data["authors"], "Joel R. Hass\nChristopher Heil\nMaurice D. Weir") 
 
         self.assertTrue("pearson" in data["url"])
@@ -31,7 +31,7 @@ class TestPearsonIntegration(unittest.TestCase):
 
         self.assertEqual(data["name"], "Software Engineering, 10th edition")
         self.assertEqual(data["authors"], "Ian Sommerville")
-        self.assertEqual(data["price"], "$154.66") 
+        self.assertEqual(data["price"], 154.66) 
 
         self.assertTrue("pearson" in data["url"])
 
@@ -42,7 +42,7 @@ class TestPearsonIntegration(unittest.TestCase):
         self.assertIsNotNone(data)
 
         self.assertEqual(data["name"], "Machine Learning with Python for Everyone, 1st edition")
-        self.assertEqual(data["price"], "$49.99")
+        self.assertEqual(data["price"], 49.99)
         self.assertEqual(data["authors"], "Mark Fenner") 
 
         self.assertTrue("pearson" in data["url"])
